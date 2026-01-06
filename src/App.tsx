@@ -6,6 +6,7 @@ function App() {
   const [activePlayer, setActivePlayer] = useState<1 | 2 | null>(null)
   const [showConfig, setShowConfig] = useState(false)
   const [durationInput, setDurationInput] = useState('5')
+  const [isVertical, setIsVertical] = useState(true) // true = vertical, false = horizontal
 
   const intervalRef = useRef<number | null>(null)
 
@@ -70,7 +71,7 @@ function App() {
   }
 
   return (
-    <div className="w-screen h-screen flex flex-col relative">
+    <div className={`w-screen h-screen flex ${isVertical ? 'flex-col' : 'flex-row'} relative`}>
       {/* Settings Icon */}
       <button
         onClick={() => setShowConfig(true)}
@@ -99,24 +100,46 @@ function App() {
         </svg>
       </button>
 
-      {/* Player 1 - Top half */}
+      {/* Rotation Icon */}
+      <button
+        onClick={() => setIsVertical(!isVertical)}
+        className="absolute top-4 left-4 z-10 p-2 bg-white rounded-full shadow-lg hover:bg-gray-100 transition-colors"
+        aria-label="Rotate Layout"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          className="h-6 w-6 text-gray-700"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth={2}
+            d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"
+          />
+        </svg>
+      </button>
+
+      {/* Player 1 */}
       <div
         onClick={() => handlePlayerClick(1)}
-        className={`w-full h-1/2 flex items-center justify-center text-9xl font-bold cursor-pointer transition-colors ${
+        className={`${isVertical ? 'w-full h-1/2' : 'w-1/2 h-full'} flex items-center justify-center text-9xl font-bold cursor-pointer transition-colors ${
           activePlayer === 1
             ? 'bg-green-500 text-white'
             : 'bg-gray-200 text-gray-700'
         }`}
       >
-        <div className="rotate-180">
+        <div className={isVertical ? 'rotate-180' : ''}>
           {formatTime(timePlayer1)}
         </div>
       </div>
 
-      {/* Player 2 - Bottom half */}
+      {/* Player 2 */}
       <div
         onClick={() => handlePlayerClick(2)}
-        className={`w-full h-1/2 flex items-center justify-center text-9xl font-bold cursor-pointer transition-colors ${
+        className={`${isVertical ? 'w-full h-1/2' : 'w-1/2 h-full'} flex items-center justify-center text-9xl font-bold cursor-pointer transition-colors ${
           activePlayer === 2
             ? 'bg-green-500 text-white'
             : 'bg-gray-200 text-gray-700'

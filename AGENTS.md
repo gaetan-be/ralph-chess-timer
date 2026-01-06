@@ -8,6 +8,13 @@
 - For vertical splits: `flex flex-col` with `h-1/2` on children
 - For horizontal splits: `flex` (or `flex-row`) with `w-1/2` on children
 
+### Dynamic Layout Switching
+- Use template literals in className to toggle between layouts: `flex ${isVertical ? 'flex-col' : 'flex-row'}`
+- Conditionally apply sizing classes: `${isVertical ? 'w-full h-1/2' : 'w-1/2 h-full'}`
+- Boolean state works well for binary layout switches (vertical/horizontal)
+- Apply conditional classes to child elements too (e.g., rotation): `className={isVertical ? 'rotate-180' : ''}`
+- Empty string for false condition ensures clean className output
+
 ### Timer Implementation
 - Use `useRef<number | null>(null)` for storing interval IDs in React
 - Always clear intervals in useEffect cleanup function
