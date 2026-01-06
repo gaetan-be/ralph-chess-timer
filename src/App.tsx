@@ -7,6 +7,7 @@ function App() {
   const [showConfig, setShowConfig] = useState(false)
   const [durationInput, setDurationInput] = useState('5')
   const [isVertical, setIsVertical] = useState(true) // true = vertical, false = horizontal
+  const [configuredDuration, setConfiguredDuration] = useState(300) // Store the configured duration
 
   const intervalRef = useRef<number | null>(null)
 
@@ -60,6 +61,7 @@ function App() {
     const minutes = parseInt(durationInput, 10)
     if (!isNaN(minutes) && minutes > 0) {
       const seconds = minutes * 60
+      setConfiguredDuration(seconds)
       setTimePlayer1(seconds)
       setTimePlayer2(seconds)
       setActivePlayer(null)
@@ -68,6 +70,15 @@ function App() {
       }
     }
     setShowConfig(false)
+  }
+
+  const handleReset = () => {
+    setTimePlayer1(configuredDuration)
+    setTimePlayer2(configuredDuration)
+    setActivePlayer(null)
+    if (intervalRef.current) {
+      clearInterval(intervalRef.current)
+    }
   }
 
   return (
@@ -118,6 +129,28 @@ function App() {
             strokeLinejoin="round"
             strokeWidth={2}
             d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"
+          />
+        </svg>
+      </button>
+
+      {/* Reset Icon */}
+      <button
+        onClick={handleReset}
+        className="absolute top-4 left-1/2 transform -translate-x-1/2 z-10 p-2 bg-white rounded-full shadow-lg hover:bg-gray-100 transition-colors"
+        aria-label="Reset Timer"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          className="h-6 w-6 text-gray-700"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth={2}
+            d="M4 12v8a2 2 0 002 2h12a2 2 0 002-2v-8m-18 0V8a2 2 0 012-2h12a2 2 0 012 2v4m-6 4h.01M8 16h.01"
           />
         </svg>
       </button>

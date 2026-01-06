@@ -44,3 +44,10 @@
 - When resetting timers, also reset `activePlayer` to null to stop the game
 - Clear any running intervals before resetting state to prevent memory leaks
 - Check if interval exists before clearing: `if (intervalRef.current) clearInterval(intervalRef.current)`
+- Store configured duration in separate state to enable reset to original configured time
+- Pattern: `configuredDuration` state maintains the target duration, allowing reset even after timers have counted down
+
+### Button Positioning
+- Center buttons horizontally: `left-1/2 transform -translate-x-1/2` for absolute positioned elements
+- This pattern works well for centering icons in top navigation bars
+- Combine with `absolute top-4` for consistent top margin across all control buttons
