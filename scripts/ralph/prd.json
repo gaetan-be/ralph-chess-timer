@@ -1,0 +1,17 @@
+{
+  "branchName": "main",
+  "userStories": [
+    {
+      "id": "US-001",
+      "title": "Create the interface for a chess timer.",
+      "acceptanceCriteria": [
+        "The interface takes up the full screen of the browser window",
+        "The screen is split in two parts, each part has a timer starting at 5:00 minutes"
+        "typecheck passes"
+      ],
+      "priority": 1,
+      "passes": false,
+      "notes": ""
+    }
+  ]
+}

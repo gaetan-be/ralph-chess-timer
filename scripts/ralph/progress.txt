@@ -1,0 +1,12 @@
+# Ralph Progress Log
+Started: 2026-01-01
+
+## Codebase Patterns
+- Code in typescript for server side modules.
+- Use React for frontend.
+- Use Tailwind for the CSS parts
+- Migrations: IF NOT EXISTS
+
+## Key Files
+- db/schema.ts
+---
