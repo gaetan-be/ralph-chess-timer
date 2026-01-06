@@ -5,6 +5,7 @@ function App() {
   const [timePlayer2, setTimePlayer2] = useState(300)
   const [activePlayer, setActivePlayer] = useState<1 | 2 | null>(null)
   const [showConfig, setShowConfig] = useState(false)
+  const [durationInput, setDurationInput] = useState('5')
 
   const intervalRef = useRef<number | null>(null)
 
@@ -52,6 +53,20 @@ function App() {
       // Start the game
       setActivePlayer(player)
     }
+  }
+
+  const handleSaveConfig = () => {
+    const minutes = parseInt(durationInput, 10)
+    if (!isNaN(minutes) && minutes > 0) {
+      const seconds = minutes * 60
+      setTimePlayer1(seconds)
+      setTimePlayer2(seconds)
+      setActivePlayer(null)
+      if (intervalRef.current) {
+        clearInterval(intervalRef.current)
+      }
+    }
+    setShowConfig(false)
   }
 
   return (
@@ -116,9 +131,20 @@ function App() {
           <div className="bg-white rounded-lg p-8 max-w-md w-full mx-4 shadow-xl">
             <h2 className="text-2xl font-bold mb-6 text-gray-800">Configuration</h2>
 
-            {/* Configuration content will go here */}
+            {/* Timer Duration Setting */}
             <div className="mb-6">
-              <p className="text-gray-600">Settings will be added here</p>
+              <label htmlFor="duration" className="block text-sm font-medium text-gray-700 mb-2">
+                Timer Duration (minutes)
+              </label>
+              <input
+                id="duration"
+                type="number"
+                min="1"
+                value={durationInput}
+                onChange={(e) => setDurationInput(e.target.value)}
+                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                placeholder="Enter minutes"
+              />
             </div>
 
             {/* Buttons */}
@@ -130,7 +156,7 @@ function App() {
                 Close
               </button>
               <button
-                onClick={() => setShowConfig(false)}
+                onClick={handleSaveConfig}
                 className="flex-1 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 transition-colors font-semibold"
               >
                 Save

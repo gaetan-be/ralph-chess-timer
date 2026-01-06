@@ -25,3 +25,15 @@
 - Use `stroke="currentColor"` to make icons inherit text color from parent
 - Standard icon sizing: `h-6 w-6` for medium-sized icons
 - Add `aria-label` to icon-only buttons for accessibility
+
+### Form Inputs & State Management
+- Use controlled inputs with separate state for input value (string) vs application state
+- Number inputs: use `type="number"` with `min` attribute for validation
+- Parse and validate input values before applying to application state
+- Input styling: `border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500`
+- Always use `htmlFor` on labels to associate with input `id` for accessibility
+
+### Timer Reset Pattern
+- When resetting timers, also reset `activePlayer` to null to stop the game
+- Clear any running intervals before resetting state to prevent memory leaks
+- Check if interval exists before clearing: `if (intervalRef.current) clearInterval(intervalRef.current)`
