@@ -60,3 +60,11 @@
 - Combine setTimeout with state setter to control flash duration
 - Store timeout refs with `useRef<number | null>(null)` for cleanup
 - Always clear timeouts in useEffect cleanup and reset functions to prevent memory leaks
+
+### Background Images
+- Use inline style for dynamic background images: `style={{ backgroundImage: 'url(...)' }}`
+- Tailwind utilities for background: `bg-cover` (scales to cover), `bg-center` (centers image)
+- Set opacity with Tailwind: `opacity-20` for 20% opacity
+- Unsplash random images: use `https://source.unsplash.com/random/WIDTHxHEIGHT?sig=RANDOM` with random sig for different images
+- Initialize background in useEffect with empty dependency array to load once on mount
+- Layer behind content with `absolute inset-0` without high z-index (defaults to lower layer)

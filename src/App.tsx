@@ -9,9 +9,16 @@ function App() {
   const [isVertical, setIsVertical] = useState(true) // true = vertical, false = horizontal
   const [configuredDuration, setConfiguredDuration] = useState(300) // Store the configured duration
   const [isFlashing, setIsFlashing] = useState(false)
+  const [backgroundImage, setBackgroundImage] = useState('')
 
   const intervalRef = useRef<number | null>(null)
   const flashTimeoutRef = useRef<number | null>(null)
+
+  // Load random background image from Unsplash
+  useEffect(() => {
+    const randomId = Math.floor(Math.random() * 1000)
+    setBackgroundImage(`https://source.unsplash.com/random/1920x1080?sig=${randomId}`)
+  }, [])
 
   useEffect(() => {
     if (activePlayer === null) return
@@ -100,6 +107,14 @@ function App() {
 
   return (
     <div className={`w-screen h-screen flex ${isVertical ? 'flex-col' : 'flex-row'} relative`}>
+      {/* Background Image */}
+      {backgroundImage && (
+        <div
+          className="absolute inset-0 bg-cover bg-center opacity-20"
+          style={{ backgroundImage: `url(${backgroundImage})` }}
+        />
+      )}
+
       {/* Settings Icon */}
       <button
         onClick={() => setShowConfig(true)}
