@@ -110,7 +110,7 @@ function App() {
       {/* Background Image */}
       {backgroundImage && (
         <div
-          className="absolute inset-0 bg-cover bg-center opacity-20"
+          className="absolute inset-0 bg-cover bg-center opacity-20 pointer-events-none"
           style={{ backgroundImage: `url(${backgroundImage})` }}
         />
       )}
