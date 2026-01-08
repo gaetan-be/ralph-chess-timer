@@ -51,3 +51,12 @@
 - Center buttons horizontally: `left-1/2 transform -translate-x-1/2` for absolute positioned elements
 - This pattern works well for centering icons in top navigation bars
 - Combine with `absolute top-4` for consistent top margin across all control buttons
+
+### Visual Flash Effects
+- Use boolean state to control flash visibility with conditional rendering
+- Create full-screen overlay with `absolute inset-0` and high z-index (e.g., z-30)
+- `pointer-events-none` prevents overlay from blocking user interactions
+- Use `animate-pulse` Tailwind class for pulsing effect
+- Combine setTimeout with state setter to control flash duration
+- Store timeout refs with `useRef<number | null>(null)` for cleanup
+- Always clear timeouts in useEffect cleanup and reset functions to prevent memory leaks

@@ -8,8 +8,10 @@ function App() {
   const [durationInput, setDurationInput] = useState('5')
   const [isVertical, setIsVertical] = useState(true) // true = vertical, false = horizontal
   const [configuredDuration, setConfiguredDuration] = useState(300) // Store the configured duration
+  const [isFlashing, setIsFlashing] = useState(false)
 
   const intervalRef = useRef<number | null>(null)
+  const flashTimeoutRef = useRef<number | null>(null)
 
   useEffect(() => {
     if (activePlayer === null) return
@@ -19,6 +21,10 @@ function App() {
         setTimePlayer1(prev => {
           if (prev <= 0) {
             clearInterval(intervalRef.current!)
+            setIsFlashing(true)
+            flashTimeoutRef.current = window.setTimeout(() => {
+              setIsFlashing(false)
+            }, 3000)
             return 0
           }
           return prev - 1
@@ -27,6 +33,10 @@ function App() {
         setTimePlayer2(prev => {
           if (prev <= 0) {
             clearInterval(intervalRef.current!)
+            setIsFlashing(true)
+            flashTimeoutRef.current = window.setTimeout(() => {
+              setIsFlashing(false)
+            }, 3000)
             return 0
           }
           return prev - 1
@@ -37,6 +47,9 @@ function App() {
     return () => {
       if (intervalRef.current) {
         clearInterval(intervalRef.current)
+      }
+      if (flashTimeoutRef.current) {
+        clearTimeout(flashTimeoutRef.current)
       }
     }
   }, [activePlayer])
@@ -76,8 +89,12 @@ function App() {
     setTimePlayer1(configuredDuration)
     setTimePlayer2(configuredDuration)
     setActivePlayer(null)
+    setIsFlashing(false)
     if (intervalRef.current) {
       clearInterval(intervalRef.current)
+    }
+    if (flashTimeoutRef.current) {
+      clearTimeout(flashTimeoutRef.current)
     }
   }
 
@@ -220,6 +237,11 @@ function App() {
             </div>
           </div>
         </div>
+      )}
+
+      {/* Red Flash Overlay */}
+      {isFlashing && (
+        <div className="absolute inset-0 bg-red-500 z-30 animate-pulse pointer-events-none" />
       )}
     </div>
   )
