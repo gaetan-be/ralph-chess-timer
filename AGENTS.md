@@ -65,6 +65,7 @@
 - Use inline style for dynamic background images: `style={{ backgroundImage: 'url(...)' }}`
 - Tailwind utilities for background: `bg-cover` (scales to cover), `bg-center` (centers image)
 - Set opacity with Tailwind: `opacity-20` for 20% opacity
-- Unsplash random images: use `https://source.unsplash.com/random/WIDTHxHEIGHT?sig=RANDOM` with random sig for different images
+- Random placeholder images: use Lorem Picsum `https://picsum.photos/WIDTHxHEIGHT?random=ID` for reliable service
+- Unsplash Source (source.unsplash.com) is deprecated and returns 503 errors - use Lorem Picsum instead
 - Initialize background in useEffect with empty dependency array to load once on mount
 - Layer behind content with `absolute inset-0` without high z-index (defaults to lower layer)

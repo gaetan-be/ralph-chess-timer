@@ -14,10 +14,10 @@ function App() {
   const intervalRef = useRef<number | null>(null)
   const flashTimeoutRef = useRef<number | null>(null)
 
-  // Load random background image from Unsplash
+  // Load random background image from Lorem Picsum
   useEffect(() => {
     const randomId = Math.floor(Math.random() * 1000)
-    setBackgroundImage(`https://source.unsplash.com/random/1920x1080?sig=${randomId}`)
+    setBackgroundImage(`https://picsum.photos/1920/1080?random=${randomId}`)
   }, [])
 
   useEffect(() => {
