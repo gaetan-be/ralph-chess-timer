@@ -1,5 +1,45 @@
 import { useState, useEffect, useRef } from 'react'
 
+interface CircularProgressProps {
+  progress: number // 0 to 1
+  size?: number
+  strokeWidth?: number
+  isActive: boolean
+}
+
+function CircularProgress({ progress, size = 80, strokeWidth = 6, isActive }: CircularProgressProps) {
+  const radius = (size - strokeWidth) / 2
+  const circumference = 2 * Math.PI * radius
+  const strokeDashoffset = circumference * (1 - progress)
+
+  return (
+    <svg width={size} height={size} className="transform -rotate-90">
+      {/* Background circle */}
+      <circle
+        cx={size / 2}
+        cy={size / 2}
+        r={radius}
+        fill="none"
+        stroke={isActive ? 'rgba(255, 255, 255, 0.3)' : 'rgba(107, 114, 128, 0.3)'}
+        strokeWidth={strokeWidth}
+      />
+      {/* Progress circle */}
+      <circle
+        cx={size / 2}
+        cy={size / 2}
+        r={radius}
+        fill="none"
+        stroke={isActive ? 'white' : '#4B5563'}
+        strokeWidth={strokeWidth}
+        strokeLinecap="round"
+        strokeDasharray={circumference}
+        strokeDashoffset={strokeDashoffset}
+        className="transition-all duration-300"
+      />
+    </svg>
+  )
+}
+
 function App() {
   const [timePlayer1, setTimePlayer1] = useState(600) // 10 minutes in seconds
   const [timePlayer2, setTimePlayer2] = useState(600)
@@ -196,7 +236,11 @@ function App() {
             : 'bg-gray-200 text-gray-700'
         }`}
       >
-        <div className={isVertical ? 'rotate-180' : ''}>
+        <div className={`flex items-center gap-6 ${isVertical ? 'rotate-180' : ''}`}>
+          <CircularProgress
+            progress={timePlayer1 / configuredDuration}
+            isActive={activePlayer === 1}
+          />
           {formatTime(timePlayer1)}
         </div>
       </div>
@@ -210,7 +254,13 @@ function App() {
             : 'bg-gray-200 text-gray-700'
         }`}
       >
-        {formatTime(timePlayer2)}
+        <div className="flex items-center gap-6">
+          <CircularProgress
+            progress={timePlayer2 / configuredDuration}
+            isActive={activePlayer === 2}
+          />
+          {formatTime(timePlayer2)}
+        </div>
       </div>
 
       {/* Configuration Modal */}
