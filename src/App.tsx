@@ -6,7 +6,7 @@ function App() {
   const [activePlayer, setActivePlayer] = useState<1 | 2 | null>(null)
   const [showConfig, setShowConfig] = useState(false)
   const [durationInput, setDurationInput] = useState('10')
-  const [isVertical, setIsVertical] = useState(true) // true = vertical, false = horizontal
+  const [isVertical, setIsVertical] = useState(false) // true = vertical, false = horizontal (default: horizontal)
   const [configuredDuration, setConfiguredDuration] = useState(600) // Store the configured duration
   const [isFlashing, setIsFlashing] = useState(false)
   const [backgroundImage, setBackgroundImage] = useState('')
