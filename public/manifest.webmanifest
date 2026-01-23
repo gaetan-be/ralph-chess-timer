@@ -1,0 +1,17 @@
+{
+  "name": "Chess Timer",
+  "short_name": "Chess Timer",
+  "description": "A simple chess timer for two players",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#e5e7eb",
+  "theme_color": "#22c55e",
+  "icons": [
+    {
+      "src": "/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
