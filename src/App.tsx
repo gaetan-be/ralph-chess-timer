@@ -1,13 +1,13 @@
 import { useState, useEffect, useRef } from 'react'
 
 function App() {
-  const [timePlayer1, setTimePlayer1] = useState(300) // 5 minutes in seconds
-  const [timePlayer2, setTimePlayer2] = useState(300)
+  const [timePlayer1, setTimePlayer1] = useState(600) // 10 minutes in seconds
+  const [timePlayer2, setTimePlayer2] = useState(600)
   const [activePlayer, setActivePlayer] = useState<1 | 2 | null>(null)
   const [showConfig, setShowConfig] = useState(false)
-  const [durationInput, setDurationInput] = useState('5')
+  const [durationInput, setDurationInput] = useState('10')
   const [isVertical, setIsVertical] = useState(true) // true = vertical, false = horizontal
-  const [configuredDuration, setConfiguredDuration] = useState(300) // Store the configured duration
+  const [configuredDuration, setConfiguredDuration] = useState(600) // Store the configured duration
   const [isFlashing, setIsFlashing] = useState(false)
   const [backgroundImage, setBackgroundImage] = useState('')
 
